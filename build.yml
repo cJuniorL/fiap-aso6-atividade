@@ -1,0 +1,135 @@
+kind: Build
+apiVersion: build.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/build-config.name: blog-django-py
+    openshift.io/build.number: '1'
+    openshift.io/build.pod-name: blog-django-py-1-build
+  selfLink: /apis/build.openshift.io/v1/namespaces/fiap-rm341182/builds/blog-django-py-1
+  resourceVersion: '27591332'
+  name: blog-django-py-1
+  uid: ae03d102-9fc9-47ff-ab3a-7209cd511e08
+  creationTimestamp: '2022-01-22T00:50:08Z'
+  namespace: fiap-rm341182
+  ownerReferences:
+    - apiVersion: build.openshift.io/v1
+      kind: BuildConfig
+      name: blog-django-py
+      uid: 8e6a6f99-396c-40e1-bc9e-fe5fb111fb9e
+      controller: true
+  labels:
+    app: blog-django-py
+    app.kubernetes.io/part-of: blog-django-py-app
+    app.kubernetes.io/instance: blog-django-py
+    openshift.io/build-config.name: blog-django-py
+    app.kubernetes.io/component: blog-django-py
+    openshift.io/build.start-policy: Serial
+    buildconfig: blog-django-py
+    app.openshift.io/runtime: python
+    app.kubernetes.io/name: python
+    app.openshift.io/runtime-version: 3.8-ubi7
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'blog-django-py:latest'
+    pushSecret:
+      name: builder-dockercfg-867rx
+  resources: {}
+  triggeredBy:
+    - message: Image change
+      imageChangeBuild:
+        imageID: >-
+          image-registry.openshift-image-registry.svc:5000/openshift/python@sha256:210326ea7d1a940d7e8f057cc96a6115c8443658b91a95d6c0ddc91ad80566cd
+        fromRef:
+          kind: ImageStreamTag
+          namespace: openshift
+          name: 'python:3.8-ubi7'
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: DockerImage
+        name: >-
+          image-registry.openshift-image-registry.svc:5000/openshift/python@sha256:210326ea7d1a940d7e8f057cc96a6115c8443658b91a95d6c0ddc91ad80566cd
+      pullSecret:
+        name: builder-dockercfg-867rx
+  postCommit: {}
+  serviceAccount: builder
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/openshift-instruqt/blog-django-py'
+    contextDir: /
+  revision:
+    type: Git
+    git:
+      commit: 9c4f338ab5f3a5ae379ecaa5bcc7d449fa41648e
+      author:
+        name: ryan jarvinen
+        email: ryan.jarvinen@gmail.com
+      committer:
+        name: GitHub
+        email: noreply@github.com
+      message: 'Merge pull request #9 from mixpix3ls/master'
+status:
+  output:
+    to:
+      imageDigest: 'sha256:57afbe89c97a340f15b3517587e59b0e329e6499615eef6de85caf1fe70c3272'
+  config:
+    kind: BuildConfig
+    namespace: fiap-rm341182
+    name: blog-django-py
+  outputDockerImageReference: >-
+    image-registry.openshift-image-registry.svc:5000/fiap-rm341182/blog-django-py:latest
+  duration: 72000000000
+  startTimestamp: '2022-01-22T00:50:08Z'
+  stages:
+    - name: FetchInputs
+      startTime: '2022-01-22T00:50:12Z'
+      durationMilliseconds: 482
+      steps:
+        - name: FetchGitSource
+          startTime: '2022-01-22T00:50:12Z'
+          durationMilliseconds: 482
+    - name: PullImages
+      startTime: '2022-01-22T00:50:14Z'
+      durationMilliseconds: 22200
+      steps:
+        - name: PullBaseImage
+          startTime: '2022-01-22T00:50:14Z'
+          durationMilliseconds: 22200
+    - name: Build
+      startTime: '2022-01-22T00:50:37Z'
+      durationMilliseconds: 42198
+      steps:
+        - name: DockerBuild
+          startTime: '2022-01-22T00:50:37Z'
+          durationMilliseconds: 42198
+    - name: PushImage
+      startTime: '2022-01-22T00:51:19Z'
+      durationMilliseconds: 1017
+      steps:
+        - name: PushImage
+          startTime: '2022-01-22T00:51:19Z'
+          durationMilliseconds: 1017
+  conditions:
+    - type: New
+      status: 'False'
+      lastUpdateTime: '2022-01-22T00:50:08Z'
+      lastTransitionTime: '2022-01-22T00:50:08Z'
+    - type: Pending
+      status: 'False'
+      lastUpdateTime: '2022-01-22T00:50:12Z'
+      lastTransitionTime: '2022-01-22T00:50:12Z'
+    - type: Running
+      status: 'False'
+      lastUpdateTime: '2022-01-22T00:51:20Z'
+      lastTransitionTime: '2022-01-22T00:51:20Z'
+    - type: Complete
+      status: 'True'
+      lastUpdateTime: '2022-01-22T00:51:20Z'
+      lastTransitionTime: '2022-01-22T00:51:20Z'
+  completionTimestamp: '2022-01-22T00:51:20Z'
+  phase: Complete
